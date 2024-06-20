@@ -11,3 +11,5 @@ workflow.txt
 
 .pytest_cache/
 .coverage
+
+docs/_build/
