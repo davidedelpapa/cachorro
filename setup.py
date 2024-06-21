@@ -1,15 +1,16 @@
 """Main setup for the library."""
 from setuptools import setup, find_packages
+from cachorro import VERSION
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="cachorro",
+    name=VERSION,
     version="0.0.1",
     author="Davide Del Papa",
     author_email="davidedelpapa((at))gmail.com",
-    description="A simple fuction caching library",
+    description="A simple function caching library",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/davidedelpapa/cachorro",

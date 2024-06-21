@@ -3,6 +3,7 @@
 Cachorro is a simple Python library mainly used to cache the returns of some functions.
 
 ![Test Coverage](https://img.shields.io/badge/Tests-PASSED-brightgreen?style=plastic&labelColor=blue)
+![Version](https://img.shields.io/badge/Version-0.0.1-blue?style=plastic)
 ![MIT License](https://img.shields.io/badge/License-MIT-blue?style=plastic)
 
 ## Installation

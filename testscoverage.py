@@ -2,6 +2,7 @@
 """Custom scripts to run pytest and generate reports."""
 import subprocess
 import sys
+from cachorro import VERSION
 
 
 def run_tests():
@@ -29,6 +30,11 @@ def update_readme(test_output, passed):
     badge_passed = 'PASSED-brightgreen' if passed else 'FAILED-red'
     badge_params = "?style=plastic&labelColor=blue"
     status_line = f"{badge}{badge_passed}{badge_params})\n"
+
+    version_badge = "![Version](https://img.shields.io/badge/Version-"
+    version_badge_params = f"{VERSION}-blue?style=plastic"
+    version_line = f"{version_badge}{version_badge_params})\n"
+
     report_lines = f"# Tests Report\n\n```text\n{test_output}\n```\n"
 
     readme_path = 'README.md'
@@ -41,6 +47,8 @@ def update_readme(test_output, passed):
         for line in lines:
             if line.startswith(badge):
                 file.write(status_line)
+            elif line.startswith(version_badge):
+                file.write(version_line)
             else:
                 file.write(line)
 

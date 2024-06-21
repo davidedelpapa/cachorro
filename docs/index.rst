@@ -1,6 +1,6 @@
 .. cachorro documentation master file
 
-Welcome to Cachrro's documentation!
+Welcome to Cachorro's documentation!
 ======================================
 
 .. toctree::

@@ -4,6 +4,7 @@ Configuration file for the Sphinx documentation builder.
 For the full list of built-in configuration values, see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
+from cachorro import VERSION
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
@@ -14,7 +15,7 @@ sys.path.insert(0, os.path.abspath('..'))
 project = 'cachorro'
 copyright = '2024, Davide Del Papa'
 author = 'Davide Del Papa'
-release = '0.1'
+release = VERSION
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
