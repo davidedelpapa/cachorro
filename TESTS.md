@@ -15,9 +15,9 @@ tests/test_decorators.py .                                               [100%]
 Name                     Stmts   Miss  Cover   Missing
 ------------------------------------------------------
 cachorro/__init__.py         3      0   100%
-cachorro/decorators.py       2      0   100%
+cachorro/decorators.py      21      0   100%
 ------------------------------------------------------
-TOTAL                        5      0   100%
+TOTAL                       24      0   100%
 
 
 ============================== 1 passed in 0.06s ===============================

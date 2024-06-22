@@ -13,3 +13,5 @@ workflow.txt
 .coverage
 
 docs/_build/
+
+saved_states/
