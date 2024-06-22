@@ -16,8 +16,17 @@ pip install cachorro
 
 ```python
 from cachorro import cacheme
+from time import sleep
 
-print(cacheme())
+@cacheme
+def test_func(arr):
+    print("going to sleep")
+    sleep(5)
+    print("awaken")
+    return [x * 2 for x in arr]
+
+result_1 = test_func(self.initial_vector) # the firs time around it executes the function
+result_2 = test_func(self.initial_vector) # the second time around it returns the cached results
 ```
 
 ## Tests

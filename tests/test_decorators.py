@@ -2,6 +2,7 @@
 import unittest
 import os
 import shutil
+from time import sleep
 from cachorro import cacheme
 
 TEST_SAVED_DIR = 'saved_states'
@@ -33,6 +34,7 @@ class TestCacheme(unittest.TestCase):
         @cacheme
         def test_func(arr):
             """Dummy function to test the library."""
+            sleep(1)
             return [x * 2 for x in arr]
 
         result_1 = test_func(self.initial_vector)

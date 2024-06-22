@@ -20,14 +20,11 @@ def cacheme(func):
         # Attempt to load the saved state
         if os.path.exists(filepath):
             with open(filepath, 'rb') as file:
-                print("Loading saved state for" +
-                      f"{func.__name__} from {filepath}")
                 return pickle.load(file)
 
         # If no saved state, execute the function and save the result
         result = func(*args, **kwargs)
         with open(filepath, 'wb') as file:
-            print(f"Saving state for {func.__name__} to {filepath}")
             pickle.dump(result, file)
 
         return result
