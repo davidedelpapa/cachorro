@@ -2,7 +2,7 @@
 import os
 import pickle
 import logging
-from functools import wraps
+from functools import wraps, partial
 from .utils import get_cache_filepath, _ensure_folder_exists
 
 
@@ -10,21 +10,28 @@ log = logging.getLogger(__name__)
 log.addHandler(logging.NullHandler())
 
 
-def cacheme(func):
-    """Cacheme decorator.
+def cacheme(func=None, *, force_rerun=False):
+    """Cacheme decorator. # noqa D417
 
     A decorator function that caches the return values of a function.
     It checks if there is a saved state in a file, and if so, it returns it.
     If there is no saved state, it executes the function,
     saves the result to a file, and returns it.
+
+    Args:
+        force_rerun (bool, optional): If True, the function will be executed,
+            even if a cache exists, and re-cached. Defaults to False.
     """
+    if func is None:
+        return partial(cacheme, force_rerun=force_rerun)
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         filepath = get_cache_filepath(func.__name__)
         _ensure_folder_exists(os.path.dirname(filepath))
 
         # Attempt to load a saved state
-        if os.path.exists(filepath):
+        if not force_rerun and os.path.exists(filepath):
             try:
                 with open(filepath, 'rb') as file:
                     return pickle.load(file)
