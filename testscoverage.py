@@ -2,7 +2,11 @@
 """Custom scripts to run pytest and generate reports."""
 import subprocess
 import sys
+import git
 from cachorro import VERSION
+
+readme_path = 'README.md'
+coverage_path = 'TESTS.md'
 
 
 def run_tests():
@@ -37,9 +41,6 @@ def update_readme(test_output, passed):
 
     report_lines = f"# Tests Report\n\n```text\n{test_output}\n```\n"
 
-    readme_path = 'README.md'
-    coverage_path = 'TESTS.md'
-
     with open(readme_path, 'r') as file:
         lines = file.readlines()
 
@@ -56,9 +57,16 @@ def update_readme(test_output, passed):
         file.write(report_lines)
 
 
+def stage_report_file():
+    """Stage the report file for commit."""
+    repo = git.Repo('.')
+    repo.index.add([coverage_path])
+
+
 if __name__ == '__main__':
     test_output, passed = run_tests()
     update_readme(test_output, passed)
+    stage_report_file()
 
     # Exit with 0 to allow the commit to proceed
     sys.exit(0)

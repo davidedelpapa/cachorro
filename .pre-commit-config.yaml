@@ -17,5 +17,5 @@ repos:
     -   id: pytest
         name: Run tests, write a report in TESTS, and update README
         entry: python testscoverage.py
-        language: python
+        language: system
         pass_filenames: false

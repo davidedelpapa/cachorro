@@ -5,6 +5,9 @@ PACKAGE_NAME="cachorro"
 echo "Building the package..."
 python setup.py sdist bdist_wheel
 
+echo "Building the documentation..."
+cd docs && make clean && make html && cd ..
+
 WHEEL_FILE=$(ls dist/*.whl | head -n 1)
 
 # Uninstall old version first
