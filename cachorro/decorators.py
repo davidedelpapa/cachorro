@@ -11,7 +11,7 @@ log.addHandler(logging.NullHandler())
 
 
 def cacheme(func=None, *, force_rerun=False):
-    """Cacheme decorator. # noqa D417
+    """Cacheme decorator.
 
     A decorator function that caches the return values of a function.
     It checks if there is a saved state in a file, and if so, it returns it.
@@ -21,7 +21,7 @@ def cacheme(func=None, *, force_rerun=False):
     Args:
         force_rerun (bool, optional): If True, the function will be executed,
             even if a cache exists, and re-cached. Defaults to False.
-    """
+    """ # noqa D417
     if func is None:
         return partial(cacheme, force_rerun=force_rerun)
 
