@@ -43,6 +43,17 @@ class TestCacheme(unittest.TestCase):
         self.assertEqual(result_1, [2, 4, 6])
         self.assertEqual(result_1, result_2)
 
+    def test_cacheme_error(self):
+        """Unit tests for cacheme decorator with errors."""
+        @cacheme
+        def test_func_err(arr):
+            """Dummy function to test the library."""
+            sleep(1)
+            return [x / 0 for x in arr]  # Division by zero
+
+        with self.assertRaises(Exception):
+            test_func_err(self.initial_vector)
+
 
 if __name__ == '__main__':
     unittest.main()

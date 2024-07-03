@@ -7,19 +7,19 @@ rootdir: /home/davide/workspace/cachorro
 configfile: pytest.ini
 testpaths: tests
 plugins: anyio-4.2.0, cov-5.0.0
-collected 1 item
+collected 2 items
 
-tests/test_decorators.py .                                               [100%]
+tests/test_decorators.py ..                                              [100%]
 
 ---------- coverage: platform linux, python 3.10.12-final-0 ----------
 Name                     Stmts   Miss  Cover   Missing
 ------------------------------------------------------
 cachorro/__init__.py         3      0   100%
-cachorro/decorators.py      19      0   100%
+cachorro/decorators.py      38      7    82%   36-42, 58
 ------------------------------------------------------
-TOTAL                       22      0   100%
+TOTAL                       41      7    83%
 
 
-============================== 1 passed in 1.10s ===============================
+============================== 2 passed in 2.13s ===============================
 
 ```
