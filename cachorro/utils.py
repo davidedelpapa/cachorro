@@ -84,7 +84,8 @@ def load_cache(func_name, program_name=None):
             or None if the cache file does not exist or fails to load.
 
     Raises:
-        None
+        Exception if the cache file fails to load,
+        after deleting the corrupted file.
 
     Example:
         >>> load_cache('my_function', program_name='my_program')
@@ -93,17 +94,52 @@ def load_cache(func_name, program_name=None):
     """
     if program_name is None:
         program_name = os.path.splitext(os.path.basename(__main__.__file__))[0]
+    complete_name = f"{program_name}: {func_name}"
     filepath = get_cache_filepath(func_name, program_name)
     if os.path.exists(filepath):
         try:
             with open(filepath, 'rb') as file:
-                complete_name = f"{program_name}: {func_name}"
                 log.info(f"Loading saved state for {complete_name}")
                 return pickle.load(file)
         except Exception as e:
-            log.critical(f"Failed to load saved state for {func_name}: {e}")
+            log_msg = f"Error loading saved state for {complete_name}: {e}\n"
+            log.critical(log_msg)
             os.remove(filepath)  # remove faulty pickle file
-            return None
+            raise
     else:
         log.info(f"No cache found for {func_name}")
         return None
+
+
+def save_cache(data, func_name, program_name=None):
+    """Saves to the cache file for the specified function.
+
+    It substitutes the @cacheme decorator at times when it can't be used.
+    For example, if the fuction is defined in a third party module,
+    however we want to cache a result anyway.
+
+    Args:
+        data (Any): The data to be saved.
+        func_name (str): The name of the function for which to save the cache.
+        program_name (str, optional): The name of the program. If not provided,
+            it will be derived from the current file name.
+
+    Raises:
+        Exception: If there is an error while saving the cache file.
+
+    Example:
+        >>> save_cache('data', 'my_function', 'my_program')
+        Saving state for my_program: my_function
+    """
+    if program_name is None:
+        program_name = os.path.splitext(os.path.basename(__main__.__file__))[0]
+    complete_name = f"{program_name}: {func_name}"
+    filepath = get_cache_filepath(func_name, program_name)
+    _ensure_folder_exists(os.path.dirname(filepath))
+    try:
+        with open(filepath, 'wb') as file:
+            log.info(f"Saving state for {complete_name}")
+            pickle.dump(data, file)
+    except Exception as e:
+        log.critical(f"Failed to save state for {complete_name}: {e}")
+        raise
