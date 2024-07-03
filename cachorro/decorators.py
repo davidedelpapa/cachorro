@@ -2,8 +2,8 @@
 import os
 import pickle
 import logging
-import __main__
 from functools import wraps
+from .utils import get_cache_filepath, _ensure_folder_exists
 
 
 log = logging.getLogger(__name__)
@@ -20,14 +20,8 @@ def cacheme(func):
     """
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Construct the filename based on the function name
-        program_name = os.path.splitext(os.path.basename(__main__.__file__))[0]
-        folder = 'saved_states'
-        filename = f"{program_name}_{func.__name__}.pkl"
-        filepath = os.path.join(folder, filename)
-
-        # Ensure the folder exists
-        os.makedirs(folder, exist_ok=True)
+        filepath = get_cache_filepath(func.__name__)
+        _ensure_folder_exists(os.path.dirname(filepath))
 
         # Attempt to load a saved state
         if os.path.exists(filepath):

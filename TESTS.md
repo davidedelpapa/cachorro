@@ -14,12 +14,13 @@ tests/test_decorators.py ..                                              [100%]
 ---------- coverage: platform linux, python 3.10.12-final-0 ----------
 Name                     Stmts   Miss  Cover   Missing
 ------------------------------------------------------
-cachorro/__init__.py         3      0   100%
-cachorro/decorators.py      38      7    82%   37-43, 58
+cachorro/__init__.py         4      0   100%
+cachorro/decorators.py      35      7    80%   31-37, 52
+cachorro/utils.py           11      0   100%
 ------------------------------------------------------
-TOTAL                       41      7    83%
+TOTAL                       50      7    86%
 
 
-============================== 2 passed in 2.12s ===============================
+============================== 2 passed in 2.11s ===============================
 
 ```
