@@ -2,6 +2,7 @@
 import os
 import pickle
 import logging
+import __main__
 from functools import wraps
 
 
@@ -20,7 +21,7 @@ def cacheme(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         # Construct the filename based on the function name
-        program_name = os.path.splitext(os.path.basename(__file__))[0]
+        program_name = os.path.splitext(os.path.basename(__main__.__file__))[0]
         folder = 'saved_states'
         filename = f"{program_name}_{func.__name__}.pkl"
         filepath = os.path.join(folder, filename)
@@ -49,8 +50,7 @@ def cacheme(func):
             return result
         except Exception as e:
             log_msg = f"Error executing function {func.__name__}: {e}\n"
-            log_msg += "DEFAULT ACTION: probably corrupted pickle file, "
-            log_msg += "DELETED"
+            log_msg += "DEFAULT ACTION: pickle file not created."
             log.critical(log_msg)
 
             # Ensure no corrupt state is saved
